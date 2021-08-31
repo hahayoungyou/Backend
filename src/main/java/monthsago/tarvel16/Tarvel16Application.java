@@ -8,7 +8,9 @@ public class Tarvel16Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Tarvel16Application.class, args);
-        System.out.println("졸리다");
+
+        System.out.println("wow");
+
     }
 
 }
