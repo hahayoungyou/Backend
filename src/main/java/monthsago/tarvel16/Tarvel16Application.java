@@ -10,7 +10,7 @@ public class Tarvel16Application {
         SpringApplication.run(Tarvel16Application.class, args);
 
         System.out.println("wow");
-
+        System.out.println("주용재님은 갑자기 컴퓨터를 고친다.");
     }
 
 }
