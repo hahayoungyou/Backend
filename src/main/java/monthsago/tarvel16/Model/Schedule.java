@@ -21,13 +21,13 @@ public class Schedule {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "startDate")
-    private String starDate;
+    @Column(name = "startdate")
+    private String startdate;
 
     @Column(name = "enddate")
     private String enddate;
 
-    @Column(name = "allDat")
-    private boolean allDat;
+    @Column(name = "alldat")
+    private String alldat;
 
 }
