@@ -6,6 +6,7 @@ import monthsago.tarvel16.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +16,7 @@ public class CommentService {
 
 
     public Optional<Comment> getComment(Integer num) {
-        Optional<Comment> comment = commentRepository.findById(num);
-        return comment;
+        return commentRepository.findById(num);
     }
 
     public Comment createComment(Comment comment) {
@@ -29,7 +29,9 @@ public class CommentService {
     }
 
 
-
+    public List<Comment> findCommentByBoardNo(Integer num){
+        return commentRepository.findCommentByBoardNo(num);
+    }
 
 
 }

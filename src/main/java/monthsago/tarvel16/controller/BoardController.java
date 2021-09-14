@@ -1,8 +1,10 @@
 package monthsago.tarvel16.controller;
 
 import monthsago.tarvel16.Model.Board;
+import monthsago.tarvel16.Model.Comment;
 import monthsago.tarvel16.Service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,12 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("/getPagingBoard")
-    public ResponseEntity<Map> getAllBoards(@RequestParam(value = "p_num") Integer p_num) {
-        if (p_num == null || p_num <= 0) p_num = 1;
 
-        return boardService.getPagingBoard(p_num);
+    @GetMapping("/getPagingBoard")
+    public ResponseEntity<Map> getAllBoards(@RequestParam(value = "p_num") Integer p_num,@RequestParam(value = "keyword", required = false) String keyword) {
+        if (p_num == null || p_num <= 0) p_num = 1;
+        System.out.println("keyword is"+keyword);
+        return boardService.getPagingBoard(p_num,keyword);
     }
 
     //create board
@@ -49,9 +52,6 @@ public class BoardController {
             @PathVariable Integer no) {
         boardService.deleteBoard(no);
     }
-
-
-
 
 
 
