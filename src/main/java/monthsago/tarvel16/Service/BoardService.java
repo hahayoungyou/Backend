@@ -1,6 +1,7 @@
 package monthsago.tarvel16.Service;
 
 import monthsago.tarvel16.Model.Board;
+import monthsago.tarvel16.Model.Comment;
 import monthsago.tarvel16.Repository.BoardRepository;
 import monthsago.tarvel16.exception.ResourceNotFoundException;
 import monthsago.tarvel16.util.PagingUtil;
@@ -22,13 +23,15 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
-    public ResponseEntity<Map> getPagingBoard(Integer p_num) {
+    public ResponseEntity<Map> getPagingBoard(Integer p_num,String keyword) {
         Map result = null;
+if(keyword == null){
+    keyword="";
+}
+        PagingUtil pu = new PagingUtil(keyword, p_num, 5, 10); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
+        List<Board> list = boardRepository.findFromTo(keyword,pu.getObjectStartNum(), pu.getObjectCountPerPage());
 
-        PagingUtil pu = new PagingUtil( p_num, 5, 10); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
-        List<Board> list = boardRepository.findFromTo(pu.getObjectStartNum(), pu.getObjectCountPerPage());
-
-        pu.setObjectCountTotal(boardRepository.findAllCount());//findAllCount()=전체 글 수
+        pu.setObjectCountTotal(boardRepository.findAllCount(keyword));//findAllCount()=전체 글 수
 
 
         pu.setCalcForPaging();
@@ -38,6 +41,7 @@ public class BoardService {
         }
 
         result = new HashMap<>();
+        result.put("keyword", keyword);
         result.put("pagingData", pu);
         result.put("list", list);
         return ResponseEntity.ok(result);
@@ -62,9 +66,11 @@ public class BoardService {
         // response.put("Deleted Board Data by id : [" + no + "]", Boolean.TRUE);
 
     }
-
-
     public Optional<Board> getBoard(Integer num) {
         return boardRepository.findById(num);
     }
+
+
 }
+
+

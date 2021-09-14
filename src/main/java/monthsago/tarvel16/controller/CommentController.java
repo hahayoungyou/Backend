@@ -5,6 +5,7 @@ import monthsago.tarvel16.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -21,11 +22,11 @@ public class CommentController {
     }
 
     //get comment by board_no
-    @GetMapping("/board/comment/{num}")
-    public Optional<Comment> getCommentByNum(
-            @PathVariable Integer num) {
-        return commentService.getComment(num);
-    }
+   // @GetMapping("/board/comment/{num}")
+   // public Optional<Comment> getCommentByNum(
+   //         @PathVariable Integer num) {
+   //     return commentService.getComment(num);
+   // }
 
     // delete comment
     @DeleteMapping("/board/comment/{no}")
@@ -34,6 +35,10 @@ public class CommentController {
         commentService.deleteComment(no);
     }
 
+    @GetMapping("/getCommentById/{no}")
+    public List<Comment> getCommentByBoardNo(@PathVariable Integer no) {
+        return commentService.findCommentByBoardNo(no);
+    }
 
 
 }
