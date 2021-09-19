@@ -25,10 +25,10 @@ public class BoardService {
 
     public ResponseEntity<Map> getPagingBoard(Integer p_num,String keyword) {
         Map result = null;
-if(keyword == null){
+if((keyword == null) || (keyword.equals("undefined"))){
     keyword="";
 }
-        PagingUtil pu = new PagingUtil(keyword, p_num, 5, 10); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
+        PagingUtil pu = new PagingUtil(keyword, p_num, 10, 10); // ($1:표시할 현재 페이지, $2:한페이지에 표시할 글 수, $3:한 페이지에 표시할 페이지 버튼의 수 )
         List<Board> list = boardRepository.findFromTo(keyword,pu.getObjectStartNum(), pu.getObjectCountPerPage());
 
         pu.setObjectCountTotal(boardRepository.findAllCount(keyword));//findAllCount()=전체 글 수
