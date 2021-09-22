@@ -25,7 +25,7 @@ public class Comment {
     private String content;
 
     @Column(name = "comment_date")
-    private String board_date;
+    private String comment_date;
 
     @Column(name = "board_id")
     private String board_id;
