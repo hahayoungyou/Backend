@@ -1,5 +1,6 @@
 package monthsago.tarvel16.controller;
 
+import monthsago.tarvel16.Model.Board;
 import monthsago.tarvel16.Model.Schedule;
 import monthsago.tarvel16.Model.Test;
 import monthsago.tarvel16.Service.ScheduleService;
@@ -24,11 +25,25 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-    //getAllBoard - mobile
+
+    @GetMapping("/getschedule/{no}")
+    public List<Schedule> getSchedule( @PathVariable String no) {
+
+        return scheduleService.getSchedule(no);
+    }
     @PostMapping("/saveschedule")
     public Schedule saveSchedule(@RequestBody Schedule schedule) {
-        return scheduleService.saveSchedule(schedule);
+
+     //=> id를 받아와서  reschedule 에 저장
+
+        return   scheduleService.saveSchedule(schedule);
     }
-
-
+    @DeleteMapping("/deleteschedule/{no}")
+    public void deleteSchedule(@PathVariable Integer no) {
+        scheduleService.deleteSchedule(no);
+    }
+    @PutMapping("/updateschedule/{no}")
+    public void updateschedule(@PathVariable Integer no, @RequestBody Schedule schedule) {
+        scheduleService.updateSchedule(no,schedule);
+    }
 }

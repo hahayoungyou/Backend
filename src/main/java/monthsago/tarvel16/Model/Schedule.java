@@ -29,5 +29,6 @@ public class Schedule {
 
     @Column(name = "alldat")
     private String alldat;
-
+    @Column(name = "userid")
+    private String userid;
 }
