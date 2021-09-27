@@ -1,20 +1,12 @@
 package monthsago.tarvel16.controller;
 
-import monthsago.tarvel16.Model.Board;
 import monthsago.tarvel16.Model.Schedule;
-import monthsago.tarvel16.Model.Test;
 import monthsago.tarvel16.Service.ScheduleService;
-import monthsago.tarvel16.Service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
@@ -30,6 +22,11 @@ public class ScheduleController {
     public List<Schedule> getSchedule( @PathVariable String no) {
 
         return scheduleService.getSchedule(no);
+    }
+    @GetMapping("/getschedulebyNum/{no}")
+    public Optional<Schedule> getScheduleByNum(@PathVariable Integer no) {
+
+        return scheduleService.getScheduleNum(no);
     }
     @PostMapping("/saveschedule")
     public Schedule saveSchedule(@RequestBody Schedule schedule) {
